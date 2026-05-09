@@ -17,13 +17,16 @@
     --text2: #8890aa;
     --text3: #4a5068;
     --accent: #4f8ef7;
-    --accent2: #3370d4;
     --rose: #f76c8a;
     --rose2: #d44d68;
     --gold: #f5c842;
-    --gold2: #c9a020;
     --green: #38d9a9;
     --red: #f87171;
+    --lv1: #60c5a8;
+    --lv2: #4f8ef7;
+    --lv3: #a78bfa;
+    --lv4: #f59e0b;
+    --lv5: #f87171;
     --radius: 12px;
     --radius-lg: 18px;
   }
@@ -35,564 +38,294 @@
     min-height: 100vh;
     overflow: hidden;
   }
-
-  /* 배경 그라디언트 느낌 */
   body::before {
-    content:'';
-    position:fixed;
-    top:-200px; left:-200px;
+    content:''; position:fixed; top:-200px; left:-200px;
     width:600px; height:600px;
     background: radial-gradient(circle, rgba(79,142,247,0.05) 0%, transparent 70%);
-    pointer-events:none;
-    z-index:0;
+    pointer-events:none; z-index:0;
   }
   body::after {
-    content:'';
-    position:fixed;
-    bottom:-200px; right:-200px;
+    content:''; position:fixed; bottom:-200px; right:-200px;
     width:600px; height:600px;
     background: radial-gradient(circle, rgba(247,108,138,0.05) 0%, transparent 70%);
-    pointer-events:none;
-    z-index:0;
+    pointer-events:none; z-index:0;
   }
+  .app { display:flex; height:100vh; position:relative; z-index:1; }
 
-  .app { display: flex; height: 100vh; position:relative; z-index:1; }
-
-  /* Sidebar */
+  /* ── 사이드바 ── */
   .sidebar {
-    width: 230px;
-    min-width: 230px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface3) transparent;
+    width:230px; min-width:230px;
+    background:var(--surface);
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column;
+    overflow-y:auto;
+    scrollbar-width:thin; scrollbar-color:var(--surface3) transparent;
   }
-
-  /* 로고/프로필 영역 */
-  .logo {
-    padding: 20px 18px 16px;
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-  }
+  .logo { padding:20px 18px 16px; border-bottom:1px solid var(--border); text-align:center; }
   .teacher-avatar {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--rose);
-    margin: 0 auto 10px;
-    display: block;
-    box-shadow: 0 0 16px rgba(247,108,138,0.3);
+    width:72px; height:72px; border-radius:50%; object-fit:cover;
+    border:2px solid var(--rose); margin:0 auto 10px; display:block;
+    box-shadow:0 0 16px rgba(247,108,138,0.3);
   }
-  .logo-title {
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 16px;
-    color: var(--text);
-    letter-spacing: 0.5px;
-  }
-  .logo-title span { color: var(--rose); }
-  .logo-sub {
-    font-size: 11px;
-    color: var(--text3);
-    margin-top: 4px;
-    letter-spacing: 0.3px;
-  }
+  .logo-title { font-family:'Black Han Sans',sans-serif; font-size:16px; color:var(--text); letter-spacing:0.5px; }
+  .logo-title span { color:var(--rose); }
+  .logo-sub { font-size:11px; color:var(--text3); margin-top:4px; }
 
-  .sidebar-section { padding: 12px 12px 6px; }
-  .sidebar-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--text3);
-    padding: 0 8px;
-    margin-bottom: 4px;
-  }
+  .sidebar-section { padding:12px 12px 6px; }
+  .sidebar-label { font-size:10px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text3); padding:0 8px; margin-bottom:4px; }
 
   .menu-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text2);
-    transition: all 0.15s;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
+    display:flex; align-items:center; gap:10px;
+    padding:9px 12px; border-radius:8px; cursor:pointer;
+    font-size:13px; color:var(--text2); transition:all 0.15s;
+    border:none; background:none; width:100%; text-align:left;
+    font-family:inherit;
   }
-  .menu-item:hover { background: var(--surface2); color: var(--text); }
-  .menu-item.active { background: rgba(79,142,247,0.15); color: var(--accent); }
-  .menu-icon { font-size: 15px; width: 18px; text-align: center; }
+  .menu-item:hover { background:var(--surface2); color:var(--text); }
+  .menu-item.active { background:rgba(79,142,247,0.15); color:var(--accent); }
+  .menu-icon { font-size:15px; width:18px; text-align:center; }
 
   .chapter-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12.5px;
-    color: var(--text2);
-    transition: all 0.15s;
+    display:flex; align-items:center; gap:8px;
+    padding:7px 12px; border-radius:8px; cursor:pointer;
+    font-size:12.5px; color:var(--text2); transition:all 0.15s;
   }
-  .chapter-item:hover { background: var(--surface2); color: var(--text); }
-  .chapter-item.active { background: rgba(247,108,138,0.12); color: var(--rose); }
-  .chapter-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--text3);
-    flex-shrink: 0;
-  }
-  .chapter-item.active .chapter-dot { background: var(--rose); }
+  .chapter-item:hover { background:var(--surface2); color:var(--text); }
+  .chapter-item.active { background:rgba(247,108,138,0.12); color:var(--rose); }
+  .chapter-dot { width:6px; height:6px; border-radius:50%; background:var(--text3); flex-shrink:0; }
+  .chapter-item.active .chapter-dot { background:var(--rose); }
 
   /* 점수 */
-  .score-area {
-    padding: 14px 12px;
-    margin-top: auto;
-    border-top: 1px solid var(--border);
+  .score-area { padding:14px 12px; margin-top:auto; border-top:1px solid var(--border); }
+  .score-row { display:flex; gap:8px; margin-top:8px; }
+  .score-badge { flex:1; background:var(--surface2); border:1px solid var(--border2); border-radius:10px; padding:8px 6px; text-align:center; }
+  .score-num { font-size:20px; font-weight:700; color:var(--green); }
+  .score-lbl { font-size:10px; color:var(--text3); margin-top:1px; }
+  .api-change-btn {
+    width:100%; background:none; border:1px solid var(--border2);
+    color:var(--text3); border-radius:8px; padding:7px 10px;
+    font-size:11px; cursor:pointer; margin-bottom:10px;
+    transition:all 0.15s; font-family:inherit;
   }
-  .score-row { display: flex; gap: 8px; margin-top: 8px; }
-  .score-badge {
-    flex: 1;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    padding: 8px 6px;
-    text-align: center;
-  }
-  .score-num { font-size: 20px; font-weight: 700; color: var(--green); }
-  .score-lbl { font-size: 10px; color: var(--text3); margin-top: 1px; }
+  .api-change-btn:hover { border-color:var(--rose); color:var(--rose); }
 
-  /* Main */
-  .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* Topbar */
+  /* ── 메인 ── */
+  .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
   .topbar {
-    display: flex;
-    align-items: center;
-    padding: 14px 24px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    gap: 12px;
+    display:flex; align-items:center; padding:12px 20px;
+    border-bottom:1px solid var(--border); background:var(--surface); gap:10px;
+    flex-wrap:wrap;
   }
-  .topbar-title { font-size: 15px; font-weight: 500; flex: 1; }
-  .mode-tabs { display: flex; gap: 4px; }
+  .topbar-title { font-size:14px; font-weight:500; flex:1; min-width:120px; }
+
+  /* 난이도 선택 */
+  .level-bar { display:flex; gap:5px; align-items:center; }
+  .level-label { font-size:11px; color:var(--text3); margin-right:2px; }
+  .lv-btn {
+    width:30px; height:26px; border-radius:6px; border:1px solid var(--border2);
+    background:none; color:var(--text2); font-size:11px; font-weight:600;
+    cursor:pointer; transition:all 0.15s; font-family:inherit;
+  }
+  .lv-btn:hover { opacity:0.85; }
+  .lv-btn.lv1 { --c:var(--lv1); }
+  .lv-btn.lv2 { --c:var(--lv2); }
+  .lv-btn.lv3 { --c:var(--lv3); }
+  .lv-btn.lv4 { --c:var(--lv4); }
+  .lv-btn.lv5 { --c:var(--lv5); }
+  .lv-btn.active { background:var(--c); border-color:var(--c); color:#fff; }
+  .lv-btn:not(.active):hover { border-color:var(--c); color:var(--c); }
+
+  .mode-tabs { display:flex; gap:4px; }
   .mode-tab {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    border: 1px solid var(--border2);
-    color: var(--text2);
-    background: none;
-    transition: all 0.15s;
-    font-family: inherit;
+    padding:5px 12px; border-radius:20px; font-size:12px; cursor:pointer;
+    border:1px solid var(--border2); color:var(--text2); background:none;
+    transition:all 0.15s; font-family:inherit;
   }
-  .mode-tab:hover { border-color: var(--rose); color: var(--rose); }
-  .mode-tab.active { background: var(--rose); border-color: var(--rose); color: #fff; }
+  .mode-tab:hover { border-color:var(--rose); color:var(--rose); }
+  .mode-tab.active { background:var(--rose); border-color:var(--rose); color:#fff; }
 
-  /* Content */
-  .content { flex: 1; display: flex; overflow: hidden; }
-  .chat-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-
+  /* 채팅 */
+  .content { flex:1; display:flex; overflow:hidden; }
+  .chat-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; }
   .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface3) transparent;
+    flex:1; overflow-y:auto; padding:20px 24px;
+    display:flex; flex-direction:column; gap:18px;
+    scrollbar-width:thin; scrollbar-color:var(--surface3) transparent;
   }
 
-  /* 메시지 버블 */
-  .msg {
-    display: flex;
-    gap: 12px;
-    max-width: 100%;
-    animation: fadeUp 0.3s ease;
-  }
+  .msg { display:flex; gap:12px; max-width:100%; animation:fadeUp 0.3s ease; }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(8px); }
+    to { opacity:1; transform:translateY(0); }
   }
-  .msg.user { flex-direction: row-reverse; }
+  .msg.user { flex-direction:row-reverse; }
   .msg-avatar {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 2px;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; flex-shrink:0; margin-top:2px;
   }
-  .msg.ai .msg-avatar { background: transparent; padding: 0; overflow: hidden; }
-  .msg.ai .msg-avatar img { width: 34px; height: 34px; object-fit: cover; border-radius: 50%; border: 1px solid var(--rose); }
-  .msg.user .msg-avatar { background: rgba(79,142,247,0.2); color: var(--accent); font-weight: 700; }
-
-  .msg-body { max-width: 78%; }
-  .msg-name { font-size: 11px; color: var(--text3); margin-bottom: 4px; padding: 0 4px; }
-  .msg.user .msg-name { text-align: right; }
-
-  .msg-bubble {
-    padding: 13px 16px;
-    border-radius: 14px;
-    font-size: 14px;
-    line-height: 1.8;
-  }
-  .msg.ai .msg-bubble {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-top-left-radius: 4px;
-  }
-  .msg.user .msg-bubble {
-    background: rgba(79,142,247,0.15);
-    border: 1px solid rgba(79,142,247,0.25);
-    border-top-right-radius: 4px;
-    text-align: right;
-  }
-  .msg-bubble strong { color: var(--rose); font-weight: 600; }
+  .msg.ai .msg-avatar { background:transparent; padding:0; overflow:hidden; }
+  .msg.ai .msg-avatar img { width:34px; height:34px; object-fit:cover; border-radius:50%; border:1px solid var(--rose); }
+  .msg.user .msg-avatar { background:rgba(79,142,247,0.2); color:var(--accent); font-weight:700; }
+  .msg-body { max-width:78%; }
+  .msg-name { font-size:11px; color:var(--text3); margin-bottom:4px; padding:0 4px; }
+  .msg.user .msg-name { text-align:right; }
+  .msg-bubble { padding:13px 16px; border-radius:14px; font-size:14px; line-height:1.8; }
+  .msg.ai .msg-bubble { background:var(--surface2); border:1px solid var(--border); border-top-left-radius:4px; }
+  .msg.user .msg-bubble { background:rgba(79,142,247,0.15); border:1px solid rgba(79,142,247,0.25); border-top-right-radius:4px; text-align:right; }
+  .msg-bubble strong { color:var(--rose); font-weight:600; }
   .msg-bubble .formula {
-    background: var(--surface3);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-family: monospace;
-    font-size: 13px;
-    color: #93c5fd;
-    margin: 8px 0;
-    display: block;
-    text-align: left;
+    background:var(--surface3); border:1px solid var(--border2); border-radius:8px;
+    padding:8px 14px; font-family:monospace; font-size:13px; color:#93c5fd;
+    margin:6px 0; display:block; text-align:left;
   }
   .msg-bubble .tip {
-    background: rgba(247,200,66,0.08);
-    border-left: 3px solid var(--gold);
-    padding: 8px 12px;
-    border-radius: 0 8px 8px 0;
-    margin: 8px 0;
-    font-size: 13px;
-    color: var(--text2);
-    text-align: left;
-  }
-  .msg-bubble .heart {
-    color: var(--rose);
+    background:rgba(245,200,66,0.08); border-left:3px solid var(--gold);
+    padding:8px 12px; border-radius:0 8px 8px 0; margin:8px 0;
+    font-size:13px; color:var(--text2); text-align:left;
   }
 
   /* 문제 카드 */
   .problem-card {
-    background: var(--surface3);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin: 8px 0;
-    text-align: left;
+    background:var(--surface3); border:1px solid var(--border2);
+    border-radius:var(--radius); padding:16px; margin:4px 0; text-align:left;
   }
-  .problem-card .prob-num {
-    font-size: 11px;
-    color: var(--rose);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+  .prob-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .prob-num { font-size:11px; color:var(--rose); letter-spacing:1px; }
+  .prob-lv-badge {
+    font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;
+    margin-left:auto;
   }
-  .problem-card .prob-text {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-  .choices { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .prob-text { font-size:14px; line-height:1.75; color:var(--text); margin-bottom:10px; }
+  .choices { display:flex; flex-direction:column; gap:6px; }
   .choice-btn {
-    padding: 9px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text2);
-    font-size: 13px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.15s;
-    font-family: inherit;
+    padding:9px 14px; border-radius:8px; border:1px solid var(--border2);
+    background:var(--surface2); color:var(--text2); font-size:13px;
+    cursor:pointer; text-align:left; transition:all 0.15s; font-family:inherit;
   }
-  .choice-btn:hover:not(:disabled) { border-color: var(--rose); color: var(--text); }
-  .choice-btn.correct { border-color: var(--green); color: var(--green); background: rgba(56,217,169,0.08); }
-  .choice-btn.wrong { border-color: var(--red); color: var(--red); background: rgba(248,113,113,0.08); }
+  .choice-btn:hover:not(:disabled) { border-color:var(--rose); color:var(--text); }
+  .choice-btn.correct { border-color:var(--green); color:var(--green); background:rgba(56,217,169,0.08); }
+  .choice-btn.wrong { border-color:var(--red); color:var(--red); background:rgba(248,113,113,0.08); }
 
-  /* 단답형 */
-  .answer-row {
-    display: flex; gap: 8px; margin-top: 10px; align-items: center;
-  }
+  .answer-row { display:flex; gap:8px; margin-top:10px; align-items:center; }
   .answer-input {
-    flex: 1;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
+    flex:1; padding:8px 12px; border-radius:8px; border:1px solid var(--border2);
+    background:var(--surface2); color:var(--text); font-size:14px;
+    font-family:inherit; outline:none; transition:border-color 0.15s;
   }
-  .answer-input:focus { border-color: var(--rose); }
-  .answer-input.correct { border-color: var(--green); }
-  .answer-input.wrong { border-color: var(--red); }
+  .answer-input:focus { border-color:var(--rose); }
+  .answer-input.correct { border-color:var(--green); }
+  .answer-input.wrong { border-color:var(--red); }
   .submit-ans {
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: var(--rose);
-    color: #fff;
-    border: none;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.15s;
+    padding:8px 14px; border-radius:8px; background:var(--rose);
+    color:#fff; border:none; font-size:13px; cursor:pointer;
+    font-family:inherit; transition:opacity 0.15s;
   }
-  .submit-ans:hover { opacity: 0.85; }
+  .submit-ans:hover { opacity:0.85; }
 
-  /* 결과 배지 */
   .result-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 8px;
+    display:inline-block; padding:4px 12px; border-radius:20px;
+    font-size:12px; font-weight:600; margin-top:8px;
   }
-  .result-badge.ok { background: rgba(56,217,169,0.15); color: var(--green); }
-  .result-badge.ng { background: rgba(248,113,113,0.12); color: var(--red); }
+  .result-badge.ok { background:rgba(56,217,169,0.15); color:var(--green); }
+  .result-badge.ng { background:rgba(248,113,113,0.12); color:var(--red); }
+
+  /* 문제 후 액션 버튼 */
+  .after-btns {
+    display:flex; gap:7px; flex-wrap:wrap; margin-top:12px;
+  }
+  .after-btn {
+    padding:7px 14px; border-radius:20px; border:1px solid var(--border2);
+    background:none; color:var(--text2); font-size:12px; cursor:pointer;
+    transition:all 0.15s; font-family:inherit;
+  }
+  .after-btn:hover { border-color:var(--rose); color:var(--rose); }
+  .after-btn.primary { background:var(--rose); border-color:var(--rose); color:#fff; }
+  .after-btn.primary:hover { opacity:0.85; }
 
   /* 공식 패널 */
   .formula-panel {
-    width: 240px;
-    min-width: 240px;
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    overflow-y: auto;
-    padding: 18px 14px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface3) transparent;
+    width:230px; min-width:230px; background:var(--surface);
+    border-left:1px solid var(--border); overflow-y:auto;
+    padding:16px 14px;
+    scrollbar-width:thin; scrollbar-color:var(--surface3) transparent;
   }
-  .panel-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text2);
-    margin-bottom: 14px;
-    letter-spacing: 0.5px;
-  }
-  .formula-card {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-  }
-  .formula-card-title {
-    font-size: 11px;
-    color: var(--rose);
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-  }
-  .formula-card-body {
-    font-size: 12.5px;
-    color: var(--text2);
-    line-height: 1.7;
-  }
-  .formula-card-body code {
-    color: #93c5fd;
-    font-family: monospace;
-    background: var(--surface3);
-    padding: 1px 5px;
-    border-radius: 4px;
-  }
+  .panel-title { font-size:13px; font-weight:600; color:var(--text2); margin-bottom:12px; }
+  .formula-card { background:var(--surface2); border:1px solid var(--border2); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .formula-card-title { font-size:11px; color:var(--rose); margin-bottom:6px; }
+  .formula-card-body { font-size:12.5px; color:var(--text2); line-height:1.7; }
+  .formula-card-body code { color:#93c5fd; font-family:monospace; background:var(--surface3); padding:1px 5px; border-radius:4px; }
 
   /* 입력 영역 */
-  .input-area {
-    padding: 14px 20px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
+  .input-area { padding:12px 18px; border-top:1px solid var(--border); background:var(--surface); }
+  .action-btns { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .action-btn {
+    padding:6px 13px; border-radius:20px; border:1px solid var(--border2);
+    background:none; color:var(--text2); font-size:12px; cursor:pointer;
+    transition:all 0.15s; font-family:inherit;
   }
-  .quick-btns {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
-  .quick-btn {
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border2);
-    background: none;
-    color: var(--text2);
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: inherit;
-  }
-  .quick-btn:hover { border-color: var(--rose); color: var(--rose); }
-  .input-row { display: flex; gap: 10px; align-items: flex-end; }
+  .action-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .action-btn.rose:hover { border-color:var(--rose); color:var(--rose); }
+
+  .input-row { display:flex; gap:10px; align-items:flex-end; }
   .user-input {
-    flex: 1;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    resize: none;
-    max-height: 120px;
-    transition: border-color 0.15s;
-    line-height: 1.5;
+    flex:1; padding:9px 14px; border-radius:10px; border:1px solid var(--border2);
+    background:var(--surface2); color:var(--text); font-size:14px;
+    font-family:inherit; outline:none; resize:none; max-height:100px;
+    transition:border-color 0.15s; line-height:1.5;
   }
-  .user-input:focus { border-color: var(--rose); }
+  .user-input:focus { border-color:var(--rose); }
   .send-btn {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: var(--rose);
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    width:36px; height:36px; border-radius:50%; background:var(--rose);
+    border:none; color:#fff; font-size:15px; cursor:pointer;
+    transition:all 0.15s; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .send-btn:hover { background: var(--rose2); transform: scale(1.05); }
-  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .send-btn:hover { background:var(--rose2); transform:scale(1.05); }
+  .send-btn:disabled { opacity:0.5; cursor:not-allowed; }
 
-  /* 로딩 점 */
+  /* 타이핑 */
   .typing-dot {
-    display: inline-block;
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--rose);
-    animation: blink 1.2s infinite;
-    margin: 0 2px;
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--rose); animation:blink 1.2s infinite; margin:0 2px;
   }
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  .typing-dot:nth-child(2) { animation-delay:0.2s; }
+  .typing-dot:nth-child(3) { animation-delay:0.4s; }
   @keyframes blink {
-    0%,80%,100% { opacity: 0.2; transform: scale(0.8); }
-    40% { opacity: 1; transform: scale(1.1); }
+    0%,80%,100% { opacity:0.2; transform:scale(0.8); }
+    40% { opacity:1; transform:scale(1.1); }
   }
 
-  /* API키 모달 */
+  /* 모달 */
   .modal-bg {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100;
-    backdrop-filter: blur(4px);
+    position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    display:flex; align-items:center; justify-content:center;
+    z-index:100; backdrop-filter:blur(4px);
   }
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    width: 420px;
-    max-width: 90vw;
-  }
-  .modal-teacher {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
-  .modal-teacher img {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--rose);
-  }
-  .modal-greeting {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text);
-  }
-  .modal-greeting strong { color: var(--rose); }
-  .modal h3 {
-    font-size: 14px;
-    color: var(--text2);
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
+  .modal { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:32px; width:420px; max-width:90vw; }
+  .modal-teacher { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+  .modal-teacher img { width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid var(--rose); }
+  .modal-greeting { font-size:15px; line-height:1.7; color:var(--text); }
+  .modal-greeting strong { color:var(--rose); }
+  .modal h3 { font-size:14px; color:var(--text2); margin-bottom:10px; font-weight:500; }
   .modal input {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    margin-bottom: 14px;
-    transition: border-color 0.15s;
+    width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--border2);
+    background:var(--surface2); color:var(--text); font-size:14px;
+    font-family:inherit; outline:none; margin-bottom:14px; transition:border-color 0.15s;
   }
-  .modal input:focus { border-color: var(--rose); }
+  .modal input:focus { border-color:var(--rose); }
   .modal-btn {
-    width: 100%;
-    padding: 11px;
-    border-radius: 10px;
-    background: var(--rose);
-    border: none;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.15s;
+    width:100%; padding:11px; border-radius:10px; background:var(--rose);
+    border:none; color:#fff; font-size:14px; font-weight:600;
+    cursor:pointer; font-family:inherit; transition:opacity 0.15s;
   }
-  .modal-btn:hover { opacity: 0.88; }
+  .modal-btn:hover { opacity:0.88; }
 
-  /* 진행률 바 */
-  .progress-bar {
-    height: 3px;
-    background: var(--surface3);
-    border-radius: 2px;
-    margin: 6px 0 0;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--rose), var(--accent));
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-
-  .chapter-meta {
-    font-size: 10px;
-    color: var(--text3);
-    margin-left: auto;
-  }
-
-  /* API 변경 버튼 */
-  .api-change-btn {
-    width:100%; background:none;
-    border:1px solid var(--border2);
-    color:var(--text3);
-    border-radius:8px;
-    padding:7px 10px;
-    font-size:11px;
-    cursor:pointer;
-    margin-bottom:10px;
-    transition:all 0.15s;
-    font-family:inherit;
-  }
-  .api-change-btn:hover { border-color:var(--rose); color:var(--rose); }
+  /* 난이도 뱃지 색상 */
+  .lv-badge-1 { background:rgba(96,197,168,0.15); color:var(--lv1); }
+  .lv-badge-2 { background:rgba(79,142,247,0.15); color:var(--lv2); }
+  .lv-badge-3 { background:rgba(167,139,250,0.15); color:var(--lv3); }
+  .lv-badge-4 { background:rgba(245,158,11,0.15); color:var(--lv4); }
+  .lv-badge-5 { background:rgba(248,113,113,0.15); color:var(--lv5); }
 </style>
 </head>
 <body>
@@ -601,10 +334,11 @@
 <div class="modal-bg" id="modal-bg">
   <div class="modal">
     <div class="modal-teacher">
-      <img src="https://raw.githubusercontent.com/jjwking/mathwithTS/main/moo1.png" alt="무준쌤" id="modal-img" onerror="this.style.display='none'">
+      <img src="https://raw.githubusercontent.com/jjwking/mathwithTS/main/moo1.png" alt="무준쌤"
+           onerror="this.style.display='none'">
       <div class="modal-greeting">
-        안녕 예준아! 👋<br>
-        오늘부터 너와 수학공부를 함께할<br>
+        예준아 안녕! 👋<br>
+        오늘부터 수학공부 같이 할<br>
         <strong>무준쌤</strong>이야 😊
       </div>
     </div>
@@ -628,19 +362,16 @@
 
     <div class="sidebar-section">
       <div class="sidebar-label">메뉴</div>
-      <button class="menu-item active" onclick="goHome()">
-        <span class="menu-icon">🏠</span> 홈
+      <button class="menu-item" onclick="showWrongNote()">
+        <span class="menu-icon">📝</span> 오답노트
       </button>
       <button class="menu-item" onclick="showFormulas()">
         <span class="menu-icon">📐</span> 공식 모음
       </button>
-      <button class="menu-item" onclick="showWrongNote()">
-        <span class="menu-icon">📝</span> 오답노트
-      </button>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">단원</div>
+      <div class="sidebar-label">단원 선택</div>
       <div id="chapter-list"></div>
     </div>
 
@@ -663,7 +394,19 @@
   <!-- 메인 -->
   <div class="main">
     <div class="topbar">
-      <div class="topbar-title" id="mode-title">💡 개념 학습</div>
+      <div class="topbar-title" id="mode-title">📚 단원을 선택해주세요</div>
+
+      <!-- 난이도 선택 -->
+      <div class="level-bar">
+        <span class="level-label">난이도</span>
+        <button class="lv-btn lv1 active" id="lv1" onclick="setLevel(1)" title="기초">1</button>
+        <button class="lv-btn lv2" id="lv2" onclick="setLevel(2)" title="초급">2</button>
+        <button class="lv-btn lv3" id="lv3" onclick="setLevel(3)" title="중급">3</button>
+        <button class="lv-btn lv4" id="lv4" onclick="setLevel(4)" title="고급">4</button>
+        <button class="lv-btn lv5" id="lv5" onclick="setLevel(5)" title="최고급">5</button>
+      </div>
+
+      <!-- 모드 탭 -->
       <div class="mode-tabs">
         <button class="mode-tab active" id="tab-study" onclick="switchMode('study')">개념</button>
         <button class="mode-tab" id="tab-quiz" onclick="switchMode('quiz')">문제</button>
@@ -675,10 +418,10 @@
       <div class="chat-panel">
         <div class="messages" id="messages"></div>
         <div class="input-area">
-          <div class="quick-btns" id="quick-btns"></div>
+          <div class="action-btns" id="action-btns"></div>
           <div class="input-row">
             <textarea class="user-input" id="user-input" rows="1"
-              placeholder="무준쌤한테 질문하기..."
+              placeholder="무준쌤한테 질문하기... (Enter로 전송)"
               onkeydown="handleKey(event)"
               oninput="autoResize(this)"></textarea>
             <button class="send-btn" id="send-btn" onclick="sendMessage()">↑</button>
@@ -695,90 +438,92 @@
 </div>
 
 <script>
-window.ANTHROPIC_API_KEY = localStorage.getItem('yejun_moojoon_api_key') || '';
+window.ANTHROPIC_API_KEY = localStorage.getItem('yejun_mj_key') || '';
 
 const MOOJOON_IMGS = [
   'https://raw.githubusercontent.com/jjwking/mathwithTS/main/moo1.png',
   'https://raw.githubusercontent.com/jjwking/mathwithTS/main/moo2.jpg'
 ];
-function getRandomMoojoon() {
-  return MOOJOON_IMGS[Math.floor(Math.random() * MOOJOON_IMGS.length)];
-}
+function getRandImg() { return MOOJOON_IMGS[Math.floor(Math.random()*2)]; }
 
-// 중3 커리큘럼
+// ── 난이도 정의 ──
+const LEVELS = {
+  1: { label:'⭐ 기초', desc:'개념 확인 수준. 정의와 기본 공식을 바로 적용하는 문제', color:'var(--lv1)', cls:'lv-badge-1' },
+  2: { label:'⭐⭐ 초급', desc:'기본 계산 문제. 한 단계 변형이 필요한 문제', color:'var(--lv2)', cls:'lv-badge-2' },
+  3: { label:'⭐⭐⭐ 중급', desc:'두세 단계 사고가 필요한 문제. 교과서 예제 수준', color:'var(--lv3)', cls:'lv-badge-3' },
+  4: { label:'⭐⭐⭐⭐ 고급', desc:'응용 문제. 여러 개념을 융합하거나 조건이 복잡한 문제', color:'var(--lv4)', cls:'lv-badge-4' },
+  5: { label:'⭐⭐⭐⭐⭐ 심화', desc:'수학올림피아드·경시 수준. 창의적 접근이 필요한 문제', color:'var(--lv5)', cls:'lv-badge-5' },
+};
+
+// ── 중3 커리큘럼 ──
 const CHAPTERS = [
   {
-    id: 'c1', title: '제곱근과 실수',
-    emoji: '√',
-    formulas: [
-      { title: '제곱근의 뜻', body: '<code>a ≥ 0</code>일 때, <code>a</code>의 양의 제곱근: <code>√a</code>' },
-      { title: '√a² = |a|', body: 'a ≥ 0이면 <code>√(a²) = a</code><br>a < 0이면 <code>√(a²) = -a</code>' },
-      { title: '제곱근의 곱셈', body: '<code>√a × √b = √(ab)</code><br>(단, a≥0, b≥0)' },
-      { title: '분모의 유리화', body: '<code>a/√b = a√b/b</code>' },
+    id:'c1', title:'제곱근과 실수', emoji:'√',
+    formulas:[
+      { title:'제곱근의 뜻', body:'<code>a ≥ 0</code>일 때 양의 제곱근: <code>√a</code>' },
+      { title:'√(a²) = |a|', body:'a≥0이면 <code>√(a²)=a</code>, a<0이면 <code>√(a²)=-a</code>' },
+      { title:'제곱근의 곱셈·나눗셈', body:'<code>√a × √b = √(ab)</code><br><code>√a ÷ √b = √(a/b)</code>' },
+      { title:'분모의 유리화', body:'<code>a/√b = a√b / b</code>' },
     ]
   },
   {
-    id: 'c2', title: '인수분해',
-    emoji: '✕',
-    formulas: [
-      { title: '합차 공식', body: '<code>a²-b² = (a+b)(a-b)</code>' },
-      { title: '완전제곱식', body: '<code>a²±2ab+b² = (a±b)²</code>' },
-      { title: 'x²+(a+b)x+ab', body: '<code>= (x+a)(x+b)</code>' },
-      { title: 'acx²+(ad+bc)x+bd', body: '<code>= (ax+b)(cx+d)</code>' },
+    id:'c2', title:'인수분해', emoji:'✕',
+    formulas:[
+      { title:'합차 공식', body:'<code>a²-b² = (a+b)(a-b)</code>' },
+      { title:'완전제곱식', body:'<code>a²±2ab+b² = (a±b)²</code>' },
+      { title:'x²+(a+b)x+ab', body:'<code>= (x+a)(x+b)</code>' },
+      { title:'acx²+(ad+bc)x+bd', body:'<code>= (ax+b)(cx+d)</code>' },
     ]
   },
   {
-    id: 'c3', title: '이차방정식',
-    emoji: 'x²',
-    formulas: [
-      { title: '근의 공식', body: '<code>x = (-b ± √(b²-4ac)) / 2a</code>' },
-      { title: '판별식 D', body: '<code>D = b²-4ac</code><br>D>0: 두 실근<br>D=0: 중근<br>D<0: 허근' },
-      { title: '근과 계수의 관계', body: '두 근 α, β에 대해:<br><code>α+β = -b/a</code><br><code>αβ = c/a</code>' },
+    id:'c3', title:'이차방정식', emoji:'x²',
+    formulas:[
+      { title:'근의 공식', body:'<code>x = (-b ± √(b²-4ac)) / 2a</code>' },
+      { title:'판별식 D', body:'D>0: 두 실근 / D=0: 중근 / D<0: 허근' },
+      { title:'근과 계수의 관계', body:'<code>α+β = -b/a</code>, <code>αβ = c/a</code>' },
     ]
   },
   {
-    id: 'c4', title: '이차함수',
-    emoji: '∪',
-    formulas: [
-      { title: '기본형', body: '<code>y = ax²</code><br>a>0: 아래로 볼록<br>a<0: 위로 볼록' },
-      { title: '표준형 (꼭짓점)', body: '<code>y = a(x-p)² + q</code><br>꼭짓점: <code>(p, q)</code>' },
-      { title: '일반형', body: '<code>y = ax² + bx + c</code><br>꼭짓점 x좌표: <code>x = -b/2a</code>' },
+    id:'c4', title:'이차함수', emoji:'∪',
+    formulas:[
+      { title:'기본형', body:'<code>y = ax²</code> (a>0: 아래볼록, a<0: 위볼록)' },
+      { title:'표준형', body:'<code>y = a(x-p)²+q</code>, 꼭짓점 <code>(p,q)</code>' },
+      { title:'일반형', body:'<code>y = ax²+bx+c</code>, 꼭짓점 x: <code>-b/2a</code>' },
     ]
   },
   {
-    id: 'c5', title: '삼각비',
-    emoji: '△',
-    formulas: [
-      { title: '삼각비 정의', body: '<code>sinA = 대변/빗변</code><br><code>cosA = 밑변/빗변</code><br><code>tanA = 대변/밑변</code>' },
-      { title: '특수각', body: '30°: sin=1/2, cos=√3/2<br>45°: sin=cos=√2/2<br>60°: sin=√3/2, cos=1/2' },
-      { title: 'sin²+cos²=1', body: '<code>sin²A + cos²A = 1</code>' },
+    id:'c5', title:'삼각비', emoji:'△',
+    formulas:[
+      { title:'삼각비 정의', body:'<code>sinA=대변/빗변</code><br><code>cosA=밑변/빗변</code><br><code>tanA=대변/밑변</code>' },
+      { title:'특수각', body:'30°: (1/2, √3/2, 1/√3)<br>45°: (√2/2, √2/2, 1)<br>60°: (√3/2, 1/2, √3)' },
+      { title:'항등식', body:'<code>sin²A + cos²A = 1</code>' },
     ]
   },
   {
-    id: 'c6', title: '원의 성질',
-    emoji: '○',
-    formulas: [
-      { title: '원의 접선', body: '접선은 접점을 지나는 반지름에 수직' },
-      { title: '원주각', body: '<code>원주각 = 중심각 × 1/2</code><br>같은 호의 원주각은 모두 같다' },
-      { title: '원에 내접하는 사각형', body: '마주보는 두 각의 합 = 180°' },
+    id:'c6', title:'원의 성질', emoji:'○',
+    formulas:[
+      { title:'원의 접선', body:'접선 ⊥ 접점의 반지름' },
+      { title:'원주각', body:'<code>원주각 = 중심각 × 1/2</code>' },
+      { title:'내접 사각형', body:'마주보는 두 각의 합 = 180°' },
     ]
   },
   {
-    id: 'c7', title: '통계',
-    emoji: '📊',
-    formulas: [
-      { title: '대푯값', body: '평균 = 합계 ÷ 개수<br>중앙값: 크기순 중간값<br>최빈값: 가장 많은 값' },
-      { title: '분산', body: '<code>분산 = Σ(x-평균)²/n</code>' },
-      { title: '표준편차', body: '<code>표준편차 = √분산</code>' },
+    id:'c7', title:'통계', emoji:'📊',
+    formulas:[
+      { title:'대푯값', body:'평균=합계÷개수, 중앙값, 최빈값' },
+      { title:'분산', body:'<code>분산 = Σ(x-평균)²/n</code>' },
+      { title:'표준편차', body:'<code>표준편차 = √분산</code>' },
     ]
   },
 ];
 
-let currentChapter = CHAPTERS[0];
+let currentChapter = null;
 let currentMode = 'study';
-let score = { correct: 0, wrong: 0 };
+let currentLevel = 1;
+let score = { correct:0, wrong:0 };
 let wrongNote = [];
 let isLoading = false;
+let lastProbCorrect = null; // 마지막 문제 정/오답 여부
 
 function init() {
   if (!window.ANTHROPIC_API_KEY) {
@@ -794,59 +539,176 @@ function saveApiKey() {
   const v = document.getElementById('api-input').value.trim();
   if (!v.startsWith('sk-ant-')) { alert('올바른 API 키를 입력해주세요 (sk-ant-로 시작)'); return; }
   window.ANTHROPIC_API_KEY = v;
-  localStorage.setItem('yejun_moojoon_api_key', v);
+  localStorage.setItem('yejun_mj_key', v);
   document.getElementById('modal-bg').style.display = 'none';
   startSession();
 }
 
 function clearApiKey() {
-  localStorage.removeItem('yejun_moojoon_api_key');
+  localStorage.removeItem('yejun_mj_key');
   window.ANTHROPIC_API_KEY = '';
   document.getElementById('messages').innerHTML = '';
   document.getElementById('modal-bg').style.display = 'flex';
 }
 
 function startSession() {
-  const msgs = document.getElementById('messages');
-  msgs.innerHTML = '';
+  document.getElementById('messages').innerHTML = '';
   addWelcomeMessage();
-  renderFormulas();
 }
 
 function addWelcomeMessage() {
-  const welcomes = [
-    `예준아 안녕! 😊 오늘부터 너와 수학공부를 함께할 <strong>무준쌤</strong>이야!<br><br>중3 수학, 생각보다 어렵지 않아~ 무준쌤이랑 같이 하면 금방 실력 늘 거야! 💪<br><br>오늘은 뭐부터 공부할까? 왼쪽에서 단원 골라봐! ✨`,
-    `예준아, 안녕! 반가워~ 😄<br>나는 오늘부터 너의 수학 선생님 <strong>무준쌤</strong>이야!<br><br>중3 수학 같이 정복해보자고! 어려운 거 있으면 언제든지 물어봐~ 😊<br><br><span class="tip">💡 팁: 왼쪽 사이드바에서 단원을 선택하면 개념 설명을 해줄게!</span>`,
+  const msgs = [
+    `예준아 안녕! 😊 오늘부터 수학공부 같이 할 <strong>무준쌤</strong>이야!<br><br>왼쪽에서 단원을 고르면 바로 시작할게~ 어떤 단원부터 할까? ✨`,
+    `안녕 예준아~ 나 <strong>무준쌤</strong>이야! 😄<br><br>중3 수학, 같이 하면 어렵지 않아! 단원 골라봐~ 💪`,
   ];
-  const txt = welcomes[Math.floor(Math.random() * welcomes.length)];
-  appendAIMsg(txt);
-  setQuickBtns(['단원 설명해줘', '문제 풀어볼게', '시험 봐볼까?', '공식 알려줘']);
+  appendAIMsg(msgs[Math.floor(Math.random()*msgs.length)]);
+  setActionBtns([]);
 }
 
 function renderChapterList() {
   const el = document.getElementById('chapter-list');
-  el.innerHTML = CHAPTERS.map((ch, i) => `
-    <div class="chapter-item ${ch.id === currentChapter.id ? 'active' : ''}" onclick="selectChapter('${ch.id}')">
+  el.innerHTML = CHAPTERS.map(ch => `
+    <div class="chapter-item ${currentChapter?.id===ch.id?'active':''}" onclick="selectChapter('${ch.id}')">
       <span class="chapter-dot"></span>
-      <span style="font-size:12px;margin-right:4px;">${ch.emoji}</span>
+      <span style="font-size:12px;margin-right:3px;">${ch.emoji}</span>
       <span>${ch.title}</span>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function selectChapter(id) {
-  currentChapter = CHAPTERS.find(c => c.id === id);
+  currentChapter = CHAPTERS.find(c=>c.id===id);
   renderChapterList();
   renderFormulas();
   document.getElementById('messages').innerHTML = '';
-  const picks = [
-    `오, <strong>${currentChapter.title}</strong>구나! 좋아~ 😊<br>무준쌤이 쉽게 설명해줄게! 뭐가 제일 헷갈려?`,
-    `<strong>${currentChapter.title}</strong>! 이거 중요한 단원이야~ ✨<br>같이 차근차근 해보자! 어떻게 시작할까?`,
-    `예준아, <strong>${currentChapter.title}</strong> 선택했네! 👍<br>개념부터 할까, 바로 문제 풀어볼까?`,
+
+  // 단원 선택 시 자동으로 모드에 맞게 시작
+  const modeLabel = {study:'개념 학습', quiz:'문제 풀기', exam:'시험'}[currentMode];
+  document.getElementById('mode-title').textContent = `${currentChapter.emoji} ${currentChapter.title} · ${modeLabel}`;
+
+  if (currentMode === 'study') {
+    autoStartStudy();
+  } else {
+    autoStartQuiz();
+  }
+}
+
+function autoStartStudy() {
+  const greets = [
+    `예준아~ <strong>${currentChapter.title}</strong> 단원이구나! 😊<br>무준쌤이 핵심 개념 쉽게 설명해줄게!`,
+    `좋아, <strong>${currentChapter.title}</strong>! ✨ 같이 해보자~`,
   ];
-  appendAIMsg(picks[Math.floor(Math.random() * picks.length)]);
-  switchMode(currentMode);
-  setQuickBtns(['개념 설명해줘', '예제 문제 내줘', '공식 정리해줘', '어디서 많이 나와?']);
+  appendAIMsg(greets[Math.floor(Math.random()*greets.length)]);
+  // 자동으로 개념 설명 요청
+  setTimeout(() => callClaude(`${currentChapter.title} 단원의 핵심 개념을 ${LEVELS[currentLevel].label} 수준에 맞게 쉽고 재미있게 설명해줘`), 300);
+  setActionBtns([
+    { label:'📝 예제 문제 내줘', fn:`sendAction('예제 문제 내줘')` },
+    { label:'🔁 다시 설명해줘', fn:`sendAction('다시 설명해줘')` },
+    { label:'❓ 더 자세히', fn:`sendAction('더 자세히 설명해줘')` },
+  ]);
+}
+
+function autoStartQuiz() {
+  const greets = [
+    `<strong>${currentChapter.title}</strong> 문제 풀어보자! 💪 ${LEVELS[currentLevel].label} 수준으로 낼게~`,
+    `좋아~ <strong>${currentChapter.title}</strong> ${LEVELS[currentLevel].label} 문제 출발! ✨`,
+  ];
+  appendAIMsg(greets[Math.floor(Math.random()*greets.length)]);
+  setTimeout(() => requestProblem(), 300);
+}
+
+function requestProblem() {
+  const lvInfo = LEVELS[currentLevel];
+  callClaude(`${currentChapter.title} 단원의 ${lvInfo.label} 수준 문제 1개 내줘. ${lvInfo.desc}`);
+  setActionBtns([]); // 문제 푸는 중엔 버튼 숨김
+}
+
+// 문제 정답 후 나타나는 버튼
+function showAfterBtns(wasCorrect) {
+  lastProbCorrect = wasCorrect;
+  setActionBtns([
+    { label:'➡️ 다음 문제 (같은 난이도)', fn:`nextProbSame()`, primary:true },
+    ...(currentLevel < 5 ? [{ label:`⬆️ 더 어렵게 (Lv.${currentLevel+1})`, fn:`nextProbHarder()` }] : []),
+    ...(currentLevel > 1 ? [{ label:`⬇️ 좀 쉽게 (Lv.${currentLevel-1})`, fn:`nextProbEasier()` }] : []),
+    { label:'💡 개념 다시 보기', fn:`switchMode('study');selectChapter('${currentChapter.id}')` },
+  ]);
+}
+
+function nextProbSame() { setActionBtns([]); requestProblem(); }
+function nextProbHarder() { setLevel(currentLevel+1); setActionBtns([]); requestProblem(); }
+function nextProbEasier() { setLevel(currentLevel-1); setActionBtns([]); requestProblem(); }
+
+function setLevel(lv) {
+  currentLevel = lv;
+  [1,2,3,4,5].forEach(i => {
+    const btn = document.getElementById(`lv${i}`);
+    btn.classList.toggle('active', i===lv);
+  });
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  ['study','quiz','exam'].forEach(m => {
+    document.getElementById(`tab-${m}`).classList.toggle('active', m===mode);
+  });
+  if (!currentChapter) return;
+  const modeLabel = {study:'개념 학습', quiz:'문제 풀기', exam:'시험'}[mode];
+  document.getElementById('mode-title').textContent = `${currentChapter.emoji} ${currentChapter.title} · ${modeLabel}`;
+  document.getElementById('messages').innerHTML = '';
+
+  if (mode === 'study') {
+    autoStartStudy();
+  } else if (mode === 'quiz') {
+    autoStartQuiz();
+  } else {
+    appendAIMsg(`<strong>${currentChapter.title}</strong> 단원 시험이야! 💪<br>총 5문제 낼게~ 시작할까?`);
+    setActionBtns([
+      { label:'🎯 시험 시작!', fn:`startExam()`, primary:true },
+    ]);
+  }
+}
+
+let examCount = 0;
+function startExam() {
+  examCount = 0;
+  setActionBtns([]);
+  requestExamProblem();
+}
+function requestExamProblem() {
+  if (examCount >= 5) {
+    appendAIMsg(`시험 끝! 총 5문제 중 ${score.correct}개 맞았어! 💪<br>${score.correct>=4?'대박이야! 예준이 완전 잘하는걸?? 🎉':score.correct>=3?'잘했어~ 조금만 더 해보자! 😊':'괜찮아, 다시 개념 보고 도전해봐! 화이팅 💪'}`);
+    setActionBtns([
+      { label:'🔁 다시 시험 보기', fn:`startExam()`, primary:true },
+      { label:'📖 개념 다시 보기', fn:`switchMode('study')` },
+    ]);
+    return;
+  }
+  const lvInfo = LEVELS[Math.min(currentLevel + Math.floor(examCount/2), 5)];
+  callClaude(`${currentChapter.title} 단원 시험 문제 ${examCount+1}번. ${lvInfo.label} 수준으로 1개만 내줘. ${lvInfo.desc}`);
+  examCount++;
+}
+
+function showFormulas() {
+  document.getElementById('messages').innerHTML = '';
+  if (!currentChapter) { appendAIMsg('먼저 단원을 선택해줘! 😊'); return; }
+  let html = `<strong>${currentChapter.title}</strong> 핵심 공식이야 예준아! 📐<br><br>`;
+  html += currentChapter.formulas.map(f =>
+    `<span class="formula">${f.title}: ${f.body.replace(/<[^>]+>/g,'')}</span>`
+  ).join('');
+  html += `<br><span class="tip">💡 공식은 이해가 먼저야! 왜 이런 공식이 생겼는지 궁금하면 물어봐~ 😊</span>`;
+  appendAIMsg(html);
+  setActionBtns([{ label:'✏️ 문제 풀어보기', fn:`switchMode('quiz')` }]);
+}
+
+function showWrongNote() {
+  document.getElementById('messages').innerHTML = '';
+  if (wrongNote.length === 0) {
+    appendAIMsg('아직 틀린 문제가 없어! 예준이 완전 잘하고 있는 거야~ 😄');
+  } else {
+    appendAIMsg(`틀린 문제 <strong>${wrongNote.length}개</strong> 있어. 같이 다시 봐보자! 💪`);
+    wrongNote.slice(-5).forEach(q => {
+      if(q) appendAIMsg(`📌 다시 풀어보기: ${q}`);
+    });
+  }
 }
 
 function renderFormulas() {
@@ -856,131 +718,75 @@ function renderFormulas() {
     <div class="formula-card">
       <div class="formula-card-title">${f.title}</div>
       <div class="formula-card-body">${f.body}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function switchMode(mode) {
-  currentMode = mode;
-  ['study','quiz','exam'].forEach(m => {
-    document.getElementById(`tab-${m}`).classList.toggle('active', m === mode);
-  });
-  const titles = { study: '💡 개념 학습', quiz: '✏️ 문제 풀기', exam: '🎯 단원 시험' };
-  document.getElementById('mode-title').textContent = titles[mode];
-
-  if (mode === 'study') {
-    setQuickBtns(['개념 설명해줘', '예시 들어줘', '공식 알려줘', '실생활 예시는?']);
-  } else if (mode === 'quiz') {
-    setQuickBtns(['쉬운 문제 내줘', '보통 문제 내줘', '어려운 문제 내줘', '다른 문제 내줘']);
-  } else {
-    setQuickBtns(['시험 시작!', '5문제 내줘', '10문제 내줘']);
-  }
-}
-
-function setQuickBtns(btns) {
-  document.getElementById('quick-btns').innerHTML = btns.map(b =>
-    `<button class="quick-btn" onclick="sendQuick('${b}')">${b}</button>`
+function setActionBtns(btns) {
+  document.getElementById('action-btns').innerHTML = btns.map(b =>
+    `<button class="action-btn${b.primary?' rose':''}" onclick="${b.fn}">${b.label}</button>`
   ).join('');
 }
 
-function goHome() {
-  document.getElementById('messages').innerHTML = '';
-  addWelcomeMessage();
+function sendAction(text) {
+  if (isLoading) return;
+  appendUserMsg(text);
+  callClaude(text);
 }
 
-function showFormulas() {
-  document.getElementById('messages').innerHTML = '';
-  const html = `<strong>${currentChapter.title}</strong> 핵심 공식 정리야 예준아! 📐<br><br>` +
-    currentChapter.formulas.map(f =>
-      `<span class="formula">${f.title}: ${f.body.replace(/<[^>]+>/g,'')}</span>`
-    ).join('') +
-    '<br><span class="tip">💡 공식은 외우는 것보다 이해하는 게 중요해! 왜 이런 공식이 나왔는지 궁금하면 물어봐~ 😊</span>';
-  appendAIMsg(html);
-}
-
-function showWrongNote() {
-  document.getElementById('messages').innerHTML = '';
-  if (wrongNote.length === 0) {
-    appendAIMsg('아직 틀린 문제가 없어! 예준이 잘하고 있는 거야~ 😄<br>계속 열심히 해보자!');
-  } else {
-    appendAIMsg(`틀린 문제 ${wrongNote.length}개야. 다시 한번 풀어보자! 💪<br><br>` + wrongNote.slice(-3).join('<br>'));
-  }
-}
-
+// ── 시스템 프롬프트 ──
 function buildSystemPrompt() {
-  const modePrompts = {
-    study: `지금은 개념 학습 모드야. ${currentChapter.title} 단원의 개념을 예준이가 이해하기 쉽게 설명해줘. 중3 수준에 맞게, 어렵지 않게.`,
-    quiz: `지금은 문제 풀기 모드야. ${currentChapter.title} 관련 문제를 내줘. 요청하면 난이도별로 문제를 만들어줘.`,
-    exam: `지금은 시험 모드야. ${currentChapter.title} 단원 전반을 아우르는 시험 문제를 출제해줘.`
-  };
+  const lvInfo = LEVELS[currentLevel];
+  const modeGuide = {
+    study: `개념 설명 모드. ${currentChapter?.title} 단원 핵심 개념을 ${lvInfo.label} 수준에 맞게 설명해줘. 수식은 [ ] 안에 넣어줘.`,
+    quiz:  `문제 출제 모드. ${currentChapter?.title} 단원 ${lvInfo.label} 수준 문제 1개. ${lvInfo.desc}`,
+    exam:  `시험 모드. ${currentChapter?.title} 단원 시험 문제. 난이도: ${lvInfo.label}. ${lvInfo.desc}`
+  }[currentMode] || '';
 
-  return `너는 "무준쌤"이야. 중학교 3학년 예준이의 수학 과외 선생님.
-  
+  return `너는 "무준쌤"이야. 중3 예준이의 수학 과외 선생님.
+
 성격:
-- 친절하고 따뜻하게 "예준아~" 하고 자주 불러줘
-- 어렵지 않게 설명하고, 칭찬도 자주 해줘
-- "잘했어!", "맞아!", "예준이 실력 느는 것 같은데?" 같은 말 많이 써줘
-- 이모지 적당히 사용 (😊 💪 ✨ 👍 등)
-- 무준쌤 본인 언급할 때 "무준쌤이" 라고 해줘
+- 따뜻하고 친근하게 "예준아~" 자주 불러줘
+- 칭찬 많이 해줘: "잘했어!", "역시 예준이야!", "실력 느는 것 같은데?" 등
+- 이모지 적당히 사용 (😊 💪 ✨ 👍)
+- 본인은 "무준쌤이" 라고 불러줘
 
-현재 단원: ${currentChapter.title}
-모드: ${modePrompts[currentMode]}
+현재 단원: ${currentChapter?.title || '미선택'}
+${modeGuide}
 
-문제를 낼 때는 반드시 이 JSON 형식으로만 줘 (마크다운 없이):
-객관식: {"type":"mcq","question":"문제","choices":["①번","②번","③번","④번","⑤번"],"correct":0,"explanation":"해설"}
+난이도 기준 (반드시 지켜줘):
+- Lv1 기초: 정의/공식 직접 대입, 1단계 계산
+- Lv2 초급: 1~2단계 변형, 기본 응용
+- Lv3 중급: 2~3단계 사고, 교과서 예제 수준
+- Lv4 고급: 복합 개념 융합, 조건이 까다로운 문제
+- Lv5 심화: 창의적 접근, 경시대회 수준
+
+현재 난이도: ${lvInfo.label} — ${lvInfo.desc}
+
+문제를 낼 때 반드시 아래 JSON 형식으로만 줘 (마크다운 코드블록 없이):
+객관식: {"type":"mcq","question":"문제","choices":["①...","②...","③...","④...","⑤..."],"correct":0,"explanation":"해설"}
 단답형: {"type":"short","question":"문제","answer":"정답","explanation":"해설"}
 
-설명할 때는 수식을 [ ] 안에 넣어줘. 예: [x² + 2x + 1 = (x+1)²]
-한 번에 너무 많은 내용보다는 핵심만, 이해하기 쉽게 설명해줘.`;
+중요: correct는 0~4 사이 인덱스(정수). 매번 다른 유형, 다른 숫자로 출제해줘.
+설명할 때 수식은 [ ] 안에. 예: [x²+2x+1=(x+1)²]`;
 }
 
-async function sendMessage() {
-  if (isLoading) return;
-  const inp = document.getElementById('user-input');
-  const text = inp.value.trim();
-  if (!text) return;
-  inp.value = ''; autoResize(inp);
-  appendUserMsg(text);
-  await callClaude(text);
-}
-
-async function sendQuick(text) {
-  if (isLoading) return;
-  appendUserMsg(text);
-  await callClaude(text);
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
+// ── API 호출 ──
 async function callClaude(userText) {
   if (!window.ANTHROPIC_API_KEY) { document.getElementById('modal-bg').style.display='flex'; return; }
   isLoading = true;
   document.getElementById('send-btn').disabled = true;
 
-  const loadingId = 'loading-' + Date.now();
-  const loadingDiv = document.createElement('div');
-  loadingDiv.className = 'msg ai';
-  loadingDiv.id = loadingId;
-  const img = getRandomMoojoon();
-  loadingDiv.innerHTML = `
+  const loadingId = 'ld-' + Date.now();
+  const loadDiv = document.createElement('div');
+  loadDiv.className = 'msg ai'; loadDiv.id = loadingId;
+  const img = getRandImg();
+  loadDiv.innerHTML = `
     <div class="msg-avatar"><img src="${img}" alt="무준쌤" onerror="this.src='${MOOJOON_IMGS[0]}'"></div>
     <div class="msg-body">
       <div class="msg-name">무준쌤</div>
-      <div class="msg-bubble">
-        <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
-      </div>
+      <div class="msg-bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
     </div>`;
-  document.getElementById('messages').appendChild(loadingDiv);
+  document.getElementById('messages').appendChild(loadDiv);
   scrollBottom();
 
   try {
@@ -988,30 +794,28 @@ async function callClaude(userText) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        messages: [{ role: 'user', content: userText }],
+        apiKey: window.ANTHROPIC_API_KEY,
         system: buildSystemPrompt(),
-        apiKey: window.ANTHROPIC_API_KEY
+        messages: [{ role:'user', content: userText }]
       })
     });
     const data = await resp.json();
-    const txt = data.content?.[0]?.text || '앗, 무준쌤이 잠깐 딴생각했나봐 😅 다시 질문해줘!';
+    const txt = data.content?.[0]?.text || '앗, 무준쌤이 잠깐 딴생각했나봐 😅 다시 눌러봐!';
     document.getElementById(loadingId)?.remove();
     processResponse(txt);
   } catch(e) {
     document.getElementById(loadingId)?.remove();
-    appendAIMsg('무준쌤이 잠깐 연결이 끊겼어 😅 다시 한번 눌러봐!');
+    appendAIMsg('무준쌤 연결이 잠깐 끊겼어 😅 다시 한번 해봐!');
   }
   isLoading = false;
   document.getElementById('send-btn').disabled = false;
 }
 
 function processResponse(txt) {
-  // JSON 문제 감지
   const jsonMatch = txt.match(/\{[\s\S]*?"type"\s*:\s*"(mcq|short)"[\s\S]*?\}/);
   if (jsonMatch) {
     try {
       const prob = JSON.parse(jsonMatch[0]);
-      // 앞뒤 텍스트
       const before = txt.substring(0, jsonMatch.index).trim();
       const after = txt.substring(jsonMatch.index + jsonMatch[0].length).trim();
       if (before) appendAIMsg(formatReply(before));
@@ -1021,6 +825,15 @@ function processResponse(txt) {
     } catch(e) {}
   }
   appendAIMsg(formatReply(txt));
+  // 개념 설명 후 버튼
+  if (currentMode === 'study') {
+    setActionBtns([
+      { label:'✏️ 문제 풀어볼게', fn:`switchMode('quiz')`, primary:true },
+      { label:'🔁 다시 설명해줘', fn:`sendAction('다시 설명해줘')` },
+      { label:'❓ 더 자세히', fn:`sendAction('더 자세히 알려줘')` },
+      { label:'📌 예시 들어줘', fn:`sendAction('실생활 예시 들어줘')` },
+    ]);
+  }
 }
 
 function formatReply(txt) {
@@ -1050,7 +863,7 @@ function appendAIMsg(html) {
   const msgs = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = 'msg ai';
-  const img = getRandomMoojoon();
+  const img = getRandImg();
   div.innerHTML = `
     <div class="msg-avatar"><img src="${img}" alt="무준쌤" onerror="this.src='${MOOJOON_IMGS[0]}'"></div>
     <div class="msg-body">
@@ -1065,34 +878,32 @@ function appendProblemMsg(prob) {
   const msgs = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = 'msg ai';
-  const img = getRandomMoojoon();
+  const img = getRandImg();
   const probId = 'prob-' + Date.now();
+  const lvInfo = LEVELS[currentLevel];
+
   let innerHtml = '';
+  const header = `
+    <div class="prob-header">
+      <span class="prob-num">📌 ${currentMode==='exam'?`시험 ${examCount}번`:'연습 문제'} · ${currentChapter?.title}</span>
+      <span class="prob-lv-badge ${lvInfo.cls}">${lvInfo.label}</span>
+    </div>`;
 
   if (prob.type === 'mcq') {
-    const choices = (prob.choices || []).map((c, i) => `
+    const choices = (prob.choices||[]).map((c,i) => `
       <button class="choice-btn" id="${probId}_c${i}"
-        onclick="checkMCQ('${probId}', ${i}, ${prob.correct}, \`${escJs(prob.explanation)}\`)">
+        onclick="checkMCQ('${probId}',${i},${prob.correct},\`${escJs(prob.explanation)}\`)">
         ${escHtml(c)}
       </button>`).join('');
-    innerHtml = `
-      <div class="problem-card">
-        <div class="prob-num">📌 ${currentMode === 'exam' ? '시험 문제' : '연습 문제'} · ${currentChapter.title}</div>
-        <div class="prob-text">${escHtml(prob.question)}</div>
-        <div class="choices">${choices}</div>
-        <div id="${probId}_result"></div>
-      </div>`;
+    innerHtml = `<div class="problem-card">${header}<div class="prob-text">${escHtml(prob.question)}</div><div class="choices">${choices}</div><div id="${probId}_result"></div></div>`;
   } else {
-    innerHtml = `
-      <div class="problem-card">
-        <div class="prob-num">📌 ${currentMode === 'exam' ? '시험 문제' : '연습 문제'} · ${currentChapter.title}</div>
-        <div class="prob-text">${escHtml(prob.question)}</div>
-        <div class="answer-row">
-          <input class="answer-input" id="${probId}_inp" placeholder="정답 입력..." />
-          <button class="submit-ans" onclick="checkShort('${probId}', \`${escJs(prob.answer)}\`, \`${escJs(prob.explanation)}\`)">확인</button>
-        </div>
-        <div id="${probId}_result"></div>
-      </div>`;
+    innerHtml = `<div class="problem-card">${header}<div class="prob-text">${escHtml(prob.question)}</div>
+      <div class="answer-row">
+        <input class="answer-input" id="${probId}_inp" placeholder="정답 입력..." onkeydown="if(event.key==='Enter')checkShort('${probId}',\`${escJs(prob.answer)}\`,\`${escJs(prob.explanation)}\`)" />
+        <button class="submit-ans" onclick="checkShort('${probId}',\`${escJs(prob.answer)}\`,\`${escJs(prob.explanation)}\`)">확인</button>
+      </div>
+      <div id="${probId}_result"></div>
+    </div>`;
   }
 
   div.innerHTML = `
@@ -1102,74 +913,83 @@ function appendProblemMsg(prob) {
   scrollBottom();
 }
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function escJs(s) {
-  return String(s).replace(/`/g,'\\`').replace(/\\/g,'\\\\');
-}
+const PRAISE = ['잘했어! 역시 예준이야! 🎉','정답! 무준쌤 기특해~ 😊','맞았어! 실력 느는 것 같은데? 💪','오! 정답! 👍','완벽해! 역시 예준이~ ✨'];
+const WRONG  = ['아쉽다~ 틀렸어. 해설 잘 읽어봐! 😅','이번엔 틀렸지만 괜찮아! 다음엔 맞출 수 있어 💪','음~ 아쉬워! 같이 다시 봐보자 😊'];
 
 function checkMCQ(id, chosen, correct, explanation) {
-  for (let i = 0; i < 5; i++) {
+  for (let i=0; i<5; i++) {
     const btn = document.getElementById(`${id}_c${i}`);
     if (!btn) continue;
     btn.disabled = true;
-    if (i === correct) btn.classList.add('correct');
-    else if (i === chosen) btn.classList.add('wrong');
+    if (i===correct) btn.classList.add('correct');
+    else if (i===chosen) btn.classList.add('wrong');
   }
-  const res = document.getElementById(id + '_result');
-  const praiseList = ['잘했어! 역시 예준이야! 🎉', '정답! 무준쌤이 기특해~ 😊', '맞았어! 예준이 실력 느는 것 같은데? 💪', '오! 정답! 👍'];
-  const wrongList = ['아쉽다~ 틀렸어. 해설 잘 읽어봐! 😅', '이번엔 틀렸지만 괜찮아! 다음엔 맞출 수 있어 💪', '음~ 아쉬워! 같이 다시 봐보자 😊'];
-  if (chosen === correct) {
-    score.correct++;
-    const praise = praiseList[Math.floor(Math.random() * praiseList.length)];
-    res.innerHTML = `<div class="result-badge ok">✓ ${praise}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
-  } else {
-    score.wrong++;
-    wrongNote.push(document.getElementById(`${id}_c0`)?.closest('.problem-card')?.querySelector('.prob-text')?.textContent || '');
-    const wrong = wrongList[Math.floor(Math.random() * wrongList.length)];
-    res.innerHTML = `<div class="result-badge ng">✗ ${wrong}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
-  }
+  const res = document.getElementById(id+'_result');
+  const ok = chosen===correct;
+  ok ? score.correct++ : score.wrong++;
+  if (!ok) wrongNote.push(document.getElementById(`${id}_c0`)?.closest('.problem-card')?.querySelector('.prob-text')?.textContent||'');
+  const msg = ok ? PRAISE[Math.floor(Math.random()*PRAISE.length)] : WRONG[Math.floor(Math.random()*WRONG.length)];
+  res.innerHTML = `<div class="result-badge ${ok?'ok':'ng'}">${ok?'✓':'✗'} ${msg}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
   updateScore();
+  // 시험 모드면 다음 문제, 아니면 선택 버튼
+  if (currentMode === 'exam') {
+    setTimeout(() => requestExamProblem(), 1200);
+  } else {
+    showAfterBtns(ok);
+  }
 }
 
 function checkShort(id, answer, explanation) {
-  const inp = document.getElementById(id + '_inp');
+  const inp = document.getElementById(id+'_inp');
   const userAns = inp.value.trim();
   if (!userAns) return;
   inp.disabled = true;
-  const res = document.getElementById(id + '_result');
-  const correct = userAns === answer || normalizeNum(userAns) === normalizeNum(answer);
-  const praiseList = ['정답이야! 예준이 최고~ 🎉', '맞았어! 역시! 💪', '오, 정답! 잘했어 😊'];
-  const wrongList = [`아쉽다~ 정답은 <strong>${answer}</strong>야! 😅`, `이번엔 틀렸어. 정답: <strong>${answer}</strong>. 다음엔 꼭! 💪`];
-  if (correct) {
-    inp.classList.add('correct');
-    score.correct++;
-    res.innerHTML = `<div class="result-badge ok">✓ ${praiseList[Math.floor(Math.random()*praiseList.length)]}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
-  } else {
-    inp.classList.add('wrong');
-    score.wrong++;
-    res.innerHTML = `<div class="result-badge ng">✗ ${wrongList[Math.floor(Math.random()*wrongList.length)]}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
-  }
+  const ok = userAns===answer || normalizeNum(userAns)===normalizeNum(answer);
+  ok ? score.correct++ : score.wrong++;
+  if (!ok) wrongNote.push(document.getElementById(`${id}_inp`)?.closest('.problem-card')?.querySelector('.prob-text')?.textContent||'');
+  const res = document.getElementById(id+'_result');
+  const msg = ok ? PRAISE[Math.floor(Math.random()*PRAISE.length)] : `아쉽다~ 정답은 <strong>${answer}</strong>야! 😅`;
+  inp.classList.add(ok?'correct':'wrong');
+  res.innerHTML = `<div class="result-badge ${ok?'ok':'ng'}">${ok?'✓':'✗'} ${msg}</div><div style="font-size:13px;color:var(--text2);margin-top:8px;">${formatReply(explanation)}</div>`;
   updateScore();
+  if (currentMode === 'exam') {
+    setTimeout(() => requestExamProblem(), 1200);
+  } else {
+    showAfterBtns(ok);
+  }
 }
 
-function normalizeNum(s) {
-  return s.replace(/\s/g,'').replace(/,/g,'.');
-}
-
+function normalizeNum(s) { return s.replace(/\s/g,'').replace(/,/g,'.'); }
 function updateScore() {
   document.getElementById('total-correct').textContent = score.correct;
   document.getElementById('total-wrong').textContent = score.wrong;
 }
 
+async function sendMessage() {
+  if (isLoading) return;
+  const inp = document.getElementById('user-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value=''; autoResize(inp);
+  appendUserMsg(text);
+  await callClaude(text);
+}
+
+function handleKey(e) {
+  if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+function autoResize(el) {
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,100)+'px';
+}
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escJs(s) { return String(s).replace(/`/g,'\\`').replace(/\\/g,'\\\\'); }
 function scrollBottom() {
-  const el = document.getElementById('messages');
-  setTimeout(() => { el.scrollTop = el.scrollHeight; }, 50);
+  const el=document.getElementById('messages');
+  setTimeout(()=>{ el.scrollTop=el.scrollHeight; },50);
 }
 
 init();
 </script>
 </body>
 </html>
-
